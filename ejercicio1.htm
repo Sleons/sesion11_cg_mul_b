@@ -39,14 +39,16 @@ function init() {
     document.body.appendChild(renderer.domElement);
     scene = new THREE.Scene();
     var arrCube = [];
-    var numcubos = 6;
+    var numcubos = 6; //Variable que nos dice el número total de cubos
     var t = 2.2;
 
+    math = Math.PI/2
 
         for (var i = 0; i < numcubos; i++){
-        arrCube.push(cubo(t, t, t, (t/2)+(t*i), (t/2)+(t*i), t/2, 'Basic', (i<=1 ? ('red'): i>1&&i<=3 ? 'blue':'yellow'), false));
-        
-        
+        arrCube.push(cubo(t, t, t, 0, 0, 0, 'Basic',(i<=1 ? 'red':(i<=3) ? 'blue':'yellow'),false)); //Se cogen los parametros de la función cubo y se crea un cubo en el origen
+        arrCube[i].geometry.translate(i*t,i*t,0) //En x se multiplica por el número de cubos en el for, dandonos la distancia en x entre cada cubo.Tomando como referencia el tamaño de este
+                                                 //Lo mismo que en la coordanada X; Sin embargo, ahora los cubos suben en vez de desplazarse horizontalmente
+                                                 //La coordenada Z se mantiene intacta ya que para la escalera solo necesitamos dos ejes de coordenadas
     }
 
     const axesHelper = new THREE.AxesHelper( 10 );
